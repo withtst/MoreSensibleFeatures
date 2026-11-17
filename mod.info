@@ -1,0 +1,8 @@
+name=更多符合常理的功能 (More Sensible Features)
+id=MoreSensibleFeatures
+description=Adds a hotkey (default Ctrl+F) to turn off and unequip held light sources, batch context-menu actions for electronic watches, belts, and tearable clothing (all nearby or only the same item type) with favorite-item protection, lets lit campfires block their tile, lets you wash every washable item you are wearing or carrying (including nested bags) at a water source, adds a K hotkey to wear/remove a carried or nearby gas mask or face mask (Ctrl+K also returns it to its original container), and lets generators be refuelled from nearby containers or the ground, using the least-full petrol containers first and returning them afterwards. 新增快捷键（默认 Ctrl+F）关闭并卸下手持光源；可批量拆除电子手表、拆解皮带、撕/剪附近所有可撕剪物品或仅同款衣物（均跳过收藏与穿戴中的物品）；点燃的营火会阻挡所在格；在水源处可清洗身上穿戴/携带（含背包嵌套容器）的全部可清洗物品，清洗后物品回到原容器或原穿戴位置；新增 K 键自动穿戴/脱下身或附近的口罩/防毒面具，Ctrl+K 脱下并放回原容器；发电机右键可从附近容器/地上用剩余油量最少的汽油容器自动加满，并放回容器。
+author=myPZmods
+versionMin=42.21
+versionMax=42.99
+modversion=0.9.9
+zomboidversion=42

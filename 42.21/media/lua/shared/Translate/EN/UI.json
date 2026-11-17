@@ -1,0 +1,11 @@
+{
+    "UI_MSF_ModName": "More Sensible Features",
+    "UI_MSF_OptionsTitle": "Held light shortcut",
+    "UI_MSF_AutoReturn": "Return the unequipped light to its original container",
+    "UI_MSF_AutoReturn_tt": "When enabled, a light source equipped from a carried container is put back into that container after it is turned off and unequipped. The shortcut can be changed in Options > Key Bindings under 'More Sensible Features'.",
+    "UI_optionscreen_binding_MoreSensibleFeatures": "More Sensible Features",
+    "UI_optionscreen_binding_MSF_UnequipLight": "Turn Off and Unequip Held Light",
+    "UI_optionscreen_binding_MSF_ToggleMask": "Toggle Mask / Gas Mask",
+    "UI_optionscreen_binding_MSF_ToggleMaskReturn": "Remove Mask and Return to Original Container",
+    "MSF_Mask_NoMask": "I have no mask or gas mask."
+}

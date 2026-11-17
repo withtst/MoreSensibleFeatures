@@ -1,0 +1,11 @@
+{
+    "UI_MSF_ModName": "更多符合常理的功能",
+    "UI_MSF_OptionsTitle": "手持光源快捷键",
+    "UI_MSF_AutoReturn": "解除装备后放回原先的容器",
+    "UI_MSF_AutoReturn_tt": "开启后，从随身容器取出并装备的光源在关闭、卸下后会自动放回该容器。快捷键可在“选项 → 按键绑定 → 更多符合常理的功能”中修改。",
+    "UI_optionscreen_binding_MoreSensibleFeatures": "更多符合常理的功能",
+    "UI_optionscreen_binding_MSF_UnequipLight": "关闭并卸下手持光源",
+    "UI_optionscreen_binding_MSF_ToggleMask": "穿戴/脱下口罩或防毒面具",
+    "UI_optionscreen_binding_MSF_ToggleMaskReturn": "脱下口罩/防毒面具并放回原处",
+    "MSF_Mask_NoMask": "我身上没有口罩或防毒面具"
+}
