@@ -400,16 +400,7 @@ local function makeFloorSource(item, worldObject)
     return nil
 end
 
-MSF_AddFuel = ISAddFuel:derive("MSF_AddFuel")
-
-function MSF_AddFuel:new(character, generator, petrol, fluidHost)
-    local o = ISBaseTimedAction.new(self, character)
-    o.petrol = petrol
-    o.fluidCont = fluidHost or petrol:getFluidContainer()
-    o.generator = generator
-    o.maxTime = o:getDuration()
-    return o
-end
+require "TimedActions/MSF_AddFuel"
 
 local function queueReturn(playerObj, candidate, playerInv)
     local source = candidate.source

@@ -114,7 +114,7 @@ end
 
 local function showNoMaskText(player)
     if HaloTextHelper and HaloTextHelper.addText then
-        HaloTextHelper.addText(player, getText("MSF_Mask_NoMask"), "", 255, 255, 0)
+        HaloTextHelper.addText(player, getText("UI_MSF_Mask_NoMask"), "", 255, 255, 0)
     end
 end
 

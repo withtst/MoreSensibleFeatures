@@ -151,9 +151,11 @@ local function queueWashBatch(playerObj, sink, items, soaps)
         local container = item:getContainer()
         local outsideInventory = container ~= playerInv
         local cleaningResult = item:getItemAfterCleaning()
-        local missingContainer = outsideInventory and cleaningResult ~= nil and container == nil
+        local missingContainer = outsideInventory and (cleaningResult ~= nil or isClient()) and container == nil
         if not missingContainer then
-            local mustTransfer = outsideInventory and cleaningResult ~= nil
+            -- The MP authority uses vanilla isValid, which requires the item
+            -- in the main inventory. Client-only action flags are not sent.
+            local mustTransfer = outsideInventory and (cleaningResult ~= nil or isClient())
             if mustTransfer then
                 ISTimedActionQueue.add(ISInventoryTransferUtil.newInventoryTransferAction(playerObj, item, container, playerInv))
             end
@@ -173,9 +175,12 @@ local function queueWashBatch(playerObj, sink, items, soaps)
             end
             if mustTransfer then
                 action.msfReturnContainer = container
-                action.msfReturnType = tostring(cleaningResult)
+                if cleaningResult ~= nil then action.msfReturnType = tostring(cleaningResult) end
             end
             ISTimedActionQueue.add(action)
+            if mustTransfer and cleaningResult == nil and container then
+                ISTimedActionQueue.add(ISInventoryTransferUtil.newInventoryTransferAction(playerObj, item, playerInv, container))
+            end
         end
     end
 end
@@ -366,6 +371,16 @@ end
 
 local originalWashComplete = ISWashClothing.complete
 MSF._originalWashComplete = originalWashComplete
+local originalWashStart = ISWashClothing.start
+MSF._originalWashStart = originalWashStart
+function ISWashClothing:start()
+    -- In MP complete runs on the authority, while perform runs here after its
+    -- acknowledgement. Capture the pre-replacement IDs on the client as well.
+    if isClient() and self.msfReturnContainer and self.msfReturnType then
+        self.msfReturnOldIds = snapshotItemIds(self.character:getInventory(), self.msfReturnType)
+    end
+    return originalWashStart(self)
+end
 function ISWashClothing:complete()
     if self.msfReturnContainer and self.msfReturnType and self.character then
         self.msfReturnOldIds = snapshotItemIds(self.character:getInventory(), self.msfReturnType)
@@ -401,10 +416,10 @@ function ISWashClothing:stop()
     local returnContainer = self.msfReturnContainer
     local item = self.item
     local alreadyCleaned = self.msfCompleted
-    local pendingBandage = returnContainer and item and item:getItemAfterCleaning() ~= nil
+    local pendingReturn = returnContainer and item
     local currentContainer = item and item:getContainer() or nil
     local result = originalWashStop(self)
-    if not alreadyCleaned and pendingBandage and character and not character:isDead()
+    if not alreadyCleaned and pendingReturn and character and not character:isDead()
         and currentContainer and currentContainer ~= returnContainer then
         pcall(function()
             ISTimedActionQueue.add(ISInventoryTransferUtil.newInventoryTransferAction(character, item, currentContainer, returnContainer))
@@ -418,7 +433,7 @@ end
 -- native Wash submenu while retaining the original safehouse permission gate.
 Events.OnFillWorldObjectContextMenu.Remove(onFillWorldObjectContextMenu)
 local washPostFillRegistered = MSF.registerWorldMenuPostFill("wash", onFillWorldObjectContextMenu)
-print("MSF|WASH|installed|version=0.9.9|postfill=" .. tostring(washPostFillRegistered))
+print("MSF|WASH|installed|version=0.9.10|postfill=" .. tostring(washPostFillRegistered))
 if not washPostFillRegistered then
     Events.OnFillWorldObjectContextMenu.Add(onFillWorldObjectContextMenu)
 end
@@ -431,6 +446,9 @@ function MSF.uninstallWashMenu()
     end
     if MSF._originalWashComplete then
         ISWashClothing.complete = MSF._originalWashComplete
+    end
+    if MSF._originalWashStart then
+        ISWashClothing.start = MSF._originalWashStart
     end
     if MSF._originalWashPerform then
         ISWashClothing.perform = MSF._originalWashPerform

@@ -4,5 +4,5 @@ description=Adds a hotkey (default Ctrl+F) to turn off and unequip held light so
 author=myPZmods
 versionMin=42.21
 versionMax=42.99
-modversion=0.9.9
+modversion=0.9.10
 zomboidversion=42

@@ -7,5 +7,5 @@
     "UI_optionscreen_binding_MSF_UnequipLight": "Turn Off and Unequip Held Light",
     "UI_optionscreen_binding_MSF_ToggleMask": "Toggle Mask / Gas Mask",
     "UI_optionscreen_binding_MSF_ToggleMaskReturn": "Remove Mask and Return to Original Container",
-    "MSF_Mask_NoMask": "I have no mask or gas mask."
+    "UI_MSF_Mask_NoMask": "I have no mask or gas mask."
 }

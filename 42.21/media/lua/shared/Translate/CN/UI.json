@@ -7,5 +7,5 @@
     "UI_optionscreen_binding_MSF_UnequipLight": "关闭并卸下手持光源",
     "UI_optionscreen_binding_MSF_ToggleMask": "穿戴/脱下口罩或防毒面具",
     "UI_optionscreen_binding_MSF_ToggleMaskReturn": "脱下口罩/防毒面具并放回原处",
-    "MSF_Mask_NoMask": "我身上没有口罩或防毒面具"
+    "UI_MSF_Mask_NoMask": "我身上没有口罩或防毒面具"
 }
